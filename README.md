@@ -10,6 +10,6 @@ El proyecto sigue el flujo completo de una solución de Inteligencia de Negocios
 3.  **SSAS (Cubo OLAP)**: Modelado multidimensional para análisis de KPIs (Ventas totales, Deuda pendiente, Margen).
 4.  **Python (Analítica Avanzada)**: Análisis exploratorio (EDA) y Clustering (K-Means) para segmentar clientes por riesgo financiero.
 
-## 📈 Resultados Clave
+## Resultados Clave
 * Identificación de brechas de recaudo mediante análisis de correlación.
 * Segmentación automatizada de clientes.
