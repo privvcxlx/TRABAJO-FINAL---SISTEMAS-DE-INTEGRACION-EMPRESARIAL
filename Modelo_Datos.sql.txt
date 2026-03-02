@@ -1,0 +1,121 @@
+USE master;
+GO
+
+-- Cerrar conexiones y borrar base si existe
+IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'STAGE_TARGET')
+BEGIN
+    ALTER DATABASE STAGE_TARGET SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE STAGE_TARGET;
+END;
+GO
+
+-- Crear base de datos
+CREATE DATABASE STAGE_TARGET;
+GO
+
+USE STAGE_TARGET;
+GO
+
+-------------------------------------------------
+-- DIMENSIONES
+-------------------------------------------------
+
+DROP TABLE IF EXISTS Fact_Ventas;
+DROP TABLE IF EXISTS Fact_Pagos;
+DROP TABLE IF EXISTS Dim_Geolocalizacion;
+DROP TABLE IF EXISTS Dim_Productos;
+DROP TABLE IF EXISTS Dim_Vendedores;
+DROP TABLE IF EXISTS Dim_Clientes;
+GO
+
+CREATE TABLE Dim_Clientes (
+    customer_id VARCHAR(50) PRIMARY KEY, 
+    customer_unique_id VARCHAR(50), 
+    customer_zip_code_prefix INT, 
+    customer_city VARCHAR(100), 
+    customer_state CHAR(2)
+);
+
+CREATE TABLE Dim_Vendedores (
+    seller_id VARCHAR(50) PRIMARY KEY,
+    seller_zip_code_prefix INT, 
+    seller_city VARCHAR(100), 
+    seller_state CHAR(2)
+);
+
+CREATE TABLE Dim_Productos ( 
+	product_id VARCHAR(50) PRIMARY KEY, 
+	product_category VARCHAR(100), 
+	product_name_length VARCHAR(100), 
+	product_description_length VARCHAR(100), 
+	product_photos_qty VARCHAR(100), 
+	product_weight_g INT, 
+	product_length_cm INT, 
+	product_height_cm INT, 
+	product_width_cm INT 
+); 
+ALTER TABLE Dim_Productos ALTER COLUMN product_weight_g BIGINT; 
+ALTER TABLE Dim_Productos ALTER COLUMN product_length_cm BIGINT; 
+ALTER TABLE Dim_Productos ALTER COLUMN product_height_cm BIGINT; 
+ALTER TABLE Dim_Productos ALTER COLUMN product_width_cm BIGINT;
+
+
+CREATE TABLE Dim_Geolocalizacion (
+    geolocation_zip_code_prefix INT, 
+    geolocation_lat DECIMAL(18,10), 
+    geolocation_lng DECIMAL(18,10), 
+    geolocation_city VARCHAR(100), 
+    geolocation_state CHAR(2) 
+);
+
+-------------------------------------------------
+-- TABLAS DE HECHOS
+-------------------------------------------------
+
+CREATE TABLE Fact_Ventas (
+    order_id VARCHAR(50) NOT NULL,
+    order_item_id INT NOT NULL,
+
+    product_id VARCHAR(50) NOT NULL,
+    seller_id VARCHAR(50) NOT NULL,
+    customer_id VARCHAR(50) NOT NULL,
+
+    order_status VARCHAR(20),
+    fecha_compra DATETIME,
+    fecha_entrega_estimada DATETIME,
+
+    price DECIMAL(10,2),
+    freight_value DECIMAL(10,2),
+
+    -- CLAVE PRIMARIA COMPUESTA
+    CONSTRAINT PK_Fact_Ventas PRIMARY KEY (order_id, order_item_id),
+
+    -- FOREIGN KEYS
+    CONSTRAINT FK_Ventas_Clientes
+        FOREIGN KEY (customer_id)
+        REFERENCES Dim_Clientes(customer_id),
+
+    CONSTRAINT FK_Ventas_Productos
+        FOREIGN KEY (product_id)
+        REFERENCES Dim_Productos(product_id),
+
+    CONSTRAINT FK_Ventas_Vendedores
+        FOREIGN KEY (seller_id)
+        REFERENCES Dim_Vendedores(seller_id)
+);
+
+CREATE TABLE Fact_Pagos (
+    order_id VARCHAR(50), 
+    payment_sequential INT,
+    payment_type VARCHAR(20),
+    payment_installments INT, 
+    payment_value DECIMAL(10,2) 
+);
+
+CREATE TABLE Stg_Orders (
+    order_id VARCHAR(50) PRIMARY KEY,
+    customer_id VARCHAR(50),
+    order_status VARCHAR(20),
+    order_purchase_timestamp DATETIME,
+    order_estimated_delivery_date DATETIME
+);
