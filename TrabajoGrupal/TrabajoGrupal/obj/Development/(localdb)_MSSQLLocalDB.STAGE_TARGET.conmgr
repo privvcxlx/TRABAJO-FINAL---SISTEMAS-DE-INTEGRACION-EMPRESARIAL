@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="(localdb)_MSSQLLocalDB.STAGE_TARGET"
+  DTS:DTSID="{79C83F66-EC38-4EBF-A71A-4525D91E2421}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=STAGE_TARGET;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-TrabajoGrupal-{79C83F66-EC38-4EBF-A71A-4525D91E2421}(localdb)\MSSQLLocalDB.STAGE_TARGET;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
