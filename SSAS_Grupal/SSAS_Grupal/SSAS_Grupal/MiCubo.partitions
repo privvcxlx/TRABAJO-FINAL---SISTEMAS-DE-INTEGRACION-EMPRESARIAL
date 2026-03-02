@@ -1,0 +1,65 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="d14a9b64-9e57-43f3-a90e-34b0bc26aa01" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>MiCubo</ID>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>Fact Ventas</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="4e038d1f-d00c-44a0-85ca-d2e66a398a6d">
+          <ID>Fact Ventas</ID>
+          <Name>Fact Ventas</Name>
+          <CreatedTimestamp>0001-01-01T05:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T05:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T05:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="8ecfd9ef-e639-4b5d-9bcf-3b061e80a23e">
+            <DataSourceViewID>Vistas_Datos</DataSourceViewID>
+            <TableID>dbo_Fact_Ventas</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Pagos</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="a2c3b073-ca20-4b79-9550-f76f61024d64">
+          <ID>Fact Pagos</ID>
+          <Name>Fact Pagos</Name>
+          <CreatedTimestamp>0001-01-01T05:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T05:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T05:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="b1d5ae1d-b8bb-490d-8589-c14e56d46bb5">
+            <DataSourceViewID>Vistas_Datos</DataSourceViewID>
+            <TableID>dbo_Fact_Pagos</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Dim Vendedores</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="c4d8e725-716b-44fd-8bbf-494d74b644d5">
+          <ID>Dim Vendedores</ID>
+          <Name>Dim Vendedores</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="3a426cd0-6c4a-49f1-8c60-68551fc0177c">
+            <DataSourceViewID>Vistas_Datos</DataSourceViewID>
+            <TableID>dbo_Dim_Vendedores</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+  </MeasureGroups>
+</Cube>
